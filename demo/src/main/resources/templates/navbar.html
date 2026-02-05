@@ -1,0 +1,93 @@
+
+
+<nav th:fragment="navbar" class="bg-neutral-primary dark:bg-neutral-dark fixed w-full border-b border-default z-20">
+  <div class="max-w-screen-xl flex items-center justify-between mx-auto h-16 px-4">
+
+    <!-- LOGO + TITLE -->
+    <a th:href="@{/home}" class="flex items-center space-x-3 rtl:space-x-reverse">
+      <i class="fa-regular fa-address-book"></i>
+      <span class="text-xl font-semibold text-heading dark:text-white">SmartCM</span>
+    </a>
+
+    <!-- RIGHT SECTION -->
+    <div class="flex items-center md:order-2 space-x-3">
+
+      <!-- DARK/LIGHT TOGGLE -->
+      <button id="theme-toggle" type="button"><i class="fa-solid fa-circle-half-stroke"></i></button>
+        
+      
+
+      <!-- LOGIN / REGISTER -->
+      <a th:href="@{/login}" 
+         class="text-heading dark:text-white hover:text-fg-brand font-medium text-sm px-3 py-2 rounded-base border border-neutral-tertiary hover:bg-neutral-secondary-soft dark:hover:bg-neutral-dark-hover">
+        Login
+      </a>
+
+      <a th:href="@{/register}" 
+         class="text-heading dark:text-white hover:text-fg-brand font-medium text-sm px-3 py-2 rounded-base border border-neutral-tertiary hover:bg-neutral-secondary-soft dark:hover:bg-neutral-dark-hover">
+        Register
+      </a>
+
+      <!-- MOBILE MENU TOGGLE -->
+      <button data-collapse-toggle="navbar-sticky" type="button"
+        class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-body rounded-base 
+               hover:bg-neutral-secondary-soft hover:text-heading focus:outline-none focus:ring-2 focus:ring-neutral-tertiary md:hidden"
+        aria-controls="navbar-sticky" aria-expanded="false">
+        <span class="sr-only">Open main menu</span>
+        <svg class="w-6 h-6" aria-hidden="true" fill="none" viewBox="0 0 24 24">
+          <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                d="M5 7h14M5 12h14M5 17h14" />
+        </svg>
+      </button>
+
+    </div>
+
+    <!-- NAV MENU -->
+    <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
+      <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-default rounded-base 
+                 bg-neutral-secondary-soft dark:bg-neutral-dark md:flex-row md:space-x-8 md:mt-0 md:border-0">
+
+        <li><a th:href="@{/home}" class="block py-2 px-3 rounded text-heading dark:text-white hover:text-fg-brand md:p-0">Home</a></li>
+        <li><a th:href="@{/about}" class="block py-2 px-3 rounded text-heading dark:text-white hover:text-fg-brand md:p-0">About</a></li>
+        <li><a href="#" class="block py-2 px-3 rounded text-heading dark:text-white hover:text-fg-brand md:p-0">Services</a></li>
+        <li><a href="#" class="block py-2 px-3 rounded text-heading dark:text-white hover:text-fg-brand md:p-0">Contact</a></li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+
+
+<!-- DARK/LIGHT TOGGLE SCRIPT -->
+<script>
+  const themeToggleBtn = document.getElementById('theme-toggle');
+  const darkIcon = document.getElementById('theme-toggle-dark-icon');
+  const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+  // Initialize icons based on current theme
+  if (localStorage.getItem('color-theme') === 'dark' || 
+      (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    darkIcon.classList.remove('hidden');
+    document.documentElement.classList.add('dark');
+  } else {
+    lightIcon.classList.remove('hidden');
+    document.documentElement.classList.remove('dark');
+  }
+
+  // Toggle theme
+  themeToggleBtn.addEventListener('click', () => {
+    darkIcon.classList.toggle('hidden');
+    lightIcon.classList.toggle('hidden');
+
+    if (document.documentElement.classList.contains('dark')) {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('color-theme', 'light');
+    } else {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('color-theme', 'dark');
+    }
+  });
+</script>

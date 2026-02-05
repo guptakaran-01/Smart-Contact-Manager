@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" class="" th:fragment="parent(content,title)">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title th:replace="${title}">Base</title>
+    
+    <link rel="stylesheet" th:href="@{/css/output.css}" />
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+</head>
+
+
+    <body class="bg-neutral-secondary-soft dark:bg-neutral-dark text-heading dark:text-white"></body>
+    <!-- NAVBAR -->
+    <div th:replace="~{navbar::navbar}"></div>
+
+    <!-- HEADER SECTION -->
+    <header class="w-full bg-white shadow-sm py-6 mb-6">
+        <div class="max-w-6xl mx-auto px-6 flex justify-between items-center">
+            <h1 class="text-3xl font-bold text-gray-700" th:replace="${title}">Page Title</h1>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT WRAPPER -->
+    <main class="max-w-6xl mx-auto px-6 py-6 bg-white shadow rounded-xl">
+        <div th:replace="${content}"></div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="mt-10 bg-white shadow-inner py-6">
+        <div class="max-w-6xl mx-auto px-6 text-center text-gray-500 text-sm">
+            © 2026 Smart Contact Manager · All Rights Reserved
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+</body>
+</html>
