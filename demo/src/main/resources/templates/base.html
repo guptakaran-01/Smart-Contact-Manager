@@ -12,29 +12,63 @@
 </head>
 
 
-    <body class="bg-neutral-secondary-soft dark:bg-neutral-dark text-heading dark:text-white"></body>
+    <body class="bg-neutral-secondary-soft dark:bg-neutral-dark text-heading dark:text-white">
     <!-- NAVBAR -->
     <div th:replace="~{navbar::navbar}"></div>
 
     <!-- HEADER SECTION -->
-    <header class="w-full bg-white shadow-sm py-6 mb-6">
+    <header class="w-full bg-white dark:bg-neutral-dark shadow-sm py-6 mb-6">
         <div class="max-w-6xl mx-auto px-6 flex justify-between items-center">
-            <h1 class="text-3xl font-bold text-gray-700" th:replace="${title}">Page Title</h1>
+            <h1 class="text-3xl font-bold text-gray-700 dark:text-white" th:replace="${title}">Page Title</h1>
         </div>
     </header>
 
     <!-- MAIN CONTENT WRAPPER -->
-    <main class="max-w-6xl mx-auto px-6 py-6 bg-white shadow rounded-xl">
+    <main class="max-w-6xl mx-auto px-6 py-6 bg-white dark:bg-neutral-dark shadow rounded-xl">
         <div th:replace="${content}"></div>
     </main>
 
     <!-- FOOTER -->
-    <footer class="mt-10 bg-white shadow-inner py-6">
-        <div class="max-w-6xl mx-auto px-6 text-center text-gray-500 text-sm">
+    <footer class="mt-10 bg-white dark:bg-neutral-dark shadow-inner py-6">
+        <div class="max-w-6xl mx-auto px-6 text-center text-gray-500 dark:text-gray-400 text-sm">
             © 2026 Smart Contact Manager · All Rights Reserved
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const darkIcon = document.getElementById('theme-toggle-dark-icon');
+        const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+        if (!themeToggleBtn || !darkIcon || !lightIcon) {
+          return;
+        }
+
+        const applyTheme = (isDark) => {
+          if (isDark) {
+            document.documentElement.classList.add('dark');
+            darkIcon.classList.remove('hidden');
+            lightIcon.classList.add('hidden');
+          } else {
+            document.documentElement.classList.remove('dark');
+            lightIcon.classList.remove('hidden');
+            darkIcon.classList.add('hidden');
+          }
+        };
+
+        const stored = localStorage.getItem('color-theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        applyTheme(stored ? stored === 'dark' : prefersDark);
+
+        themeToggleBtn.addEventListener('click', () => {
+          const isDark = document.documentElement.classList.contains('dark');
+          const nextIsDark = !isDark;
+          localStorage.setItem('color-theme', nextIsDark ? 'dark' : 'light');
+          applyTheme(nextIsDark);
+        });
+      });
+    </script>
 </body>
 </html>

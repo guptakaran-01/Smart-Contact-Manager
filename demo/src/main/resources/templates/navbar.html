@@ -13,7 +13,10 @@
     <div class="flex items-center md:order-2 space-x-3">
 
       <!-- DARK/LIGHT TOGGLE -->
-      <button id="theme-toggle" type="button"><i class="fa-solid fa-circle-half-stroke"></i></button>
+      <button id="theme-toggle" type="button" class="p-2 rounded-base">
+        <i id="theme-toggle-dark-icon" class="fa-solid fa-moon hidden"></i>
+        <i id="theme-toggle-light-icon" class="fa-solid fa-sun hidden"></i>
+      </button>
         
       
 
@@ -61,33 +64,3 @@
 
 
 
-<!-- DARK/LIGHT TOGGLE SCRIPT -->
-<script>
-  const themeToggleBtn = document.getElementById('theme-toggle');
-  const darkIcon = document.getElementById('theme-toggle-dark-icon');
-  const lightIcon = document.getElementById('theme-toggle-light-icon');
-
-  // Initialize icons based on current theme
-  if (localStorage.getItem('color-theme') === 'dark' || 
-      (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-    darkIcon.classList.remove('hidden');
-    document.documentElement.classList.add('dark');
-  } else {
-    lightIcon.classList.remove('hidden');
-    document.documentElement.classList.remove('dark');
-  }
-
-  // Toggle theme
-  themeToggleBtn.addEventListener('click', () => {
-    darkIcon.classList.toggle('hidden');
-    lightIcon.classList.toggle('hidden');
-
-    if (document.documentElement.classList.contains('dark')) {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('color-theme', 'light');
-    } else {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('color-theme', 'dark');
-    }
-  });
-</script>
