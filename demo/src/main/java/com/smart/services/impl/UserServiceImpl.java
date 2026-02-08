@@ -6,8 +6,10 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.smart.helper.AppConstants;
 import com.smart.helper.ResourcenotFoundException;
 import com.smart.model.User;
 import com.smart.repositories.UserRepo;
@@ -19,10 +21,19 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepo userRepo;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     private Logger logger=LoggerFactory.getLogger(this.getClass());
 
     @Override
-    public User saveUser(User user) {
+     public User saveUser(User user) {
+
+      //Encode Password 
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+       // Setting Manually hardcoding roles 
+       user.setRoleList(List.of(AppConstants.ROLE_USER));
 
        return userRepo.save(user);
     }

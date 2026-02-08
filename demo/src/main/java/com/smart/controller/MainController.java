@@ -43,6 +43,13 @@ public class MainController {
         return "register";
     }
 
+
+    @RequestMapping("/login")
+    public String loginPage(){
+        return "login";
+    }
+
+
     // processing register
     @PostMapping("do-register")
     public String processRegister(@Valid @ModelAttribute UserForm userForm, BindingResult bindingResult,
